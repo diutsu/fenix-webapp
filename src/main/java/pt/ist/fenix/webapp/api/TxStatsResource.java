@@ -1,5 +1,6 @@
 package pt.ist.fenix.webapp.api;
 
+import org.fenixedu.bennu.core.groups.Group;
 import pt.ist.fenixframework.backend.jvstmojb.pstm.TransactionSupport;
 
 import java.net.InetAddress;
@@ -33,7 +34,7 @@ public class TxStatsResource extends BennuRestResource {
     @OAuthEndpoint("_internal")
     public String stats(@QueryParam("chart") @DefaultValue("false") boolean chart, @QueryParam("hours") @DefaultValue("24") int
             hoursToReport) throws SQLException {
-        accessControl("#managers");
+        accessControl(Group.managers());
         JsonObject data = new JsonObject();
 
         data.addProperty("timestamp", DateTime.now().toString("dd/MM/yyyy HH:mm:ss"));
